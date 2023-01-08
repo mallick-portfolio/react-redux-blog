@@ -4,6 +4,10 @@ import Home from "./components/Home";
 import About from "./components/About";
 import Root from "./Root";
 import ErrorPage from "./components/404";
+import AddBLog from "./components/AddBLog";
+import SingleBlog from "./components/SingleBlog";
+import Login from "./components/Login";
+import BlogList from "./components/BlogList";
 
 const router = createBrowserRouter([
   {
@@ -18,10 +22,22 @@ const router = createBrowserRouter([
       {
         path: "about",
         element: <About />,
-        loader: ({ request }) =>
-          fetch("/api/dashboard.json", {
-            signal: request.signal,
-          }),
+      },
+      {
+        path: "add-blog",
+        element: <AddBLog />,
+      },
+      {
+        path: "blog/:id",
+        element: <SingleBlog />,
+      },
+      {
+        path: "blog-list",
+        element: <BlogList />,
+      },
+      {
+        path: "login",
+        element: <Login />,
       },
       //   {
       //     element: <AuthLayout />,
