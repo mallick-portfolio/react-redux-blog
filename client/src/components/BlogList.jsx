@@ -1,11 +1,13 @@
 import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { deleteBlog, getBlogs } from "../app/blogSlice";
 import Loading from "./Loading";
 const BlogList = () => {
   const { blogs, loading, error } = useSelector((state) => state.blog);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   useEffect(() => {
     dispatch(getBlogs());
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -19,6 +21,9 @@ const BlogList = () => {
 
   const handleDelete = (id) => {
     dispatch(deleteBlog(id));
+  };
+  const handleEdit = (id) => {
+    navigate(`/edit-blog/${id}`);
   };
 
   let blogItem = "";
@@ -40,6 +45,7 @@ const BlogList = () => {
           </div>
           <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
             <button
+              onClick={() => handleEdit(blog?._id)}
               type="button"
               className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
             >

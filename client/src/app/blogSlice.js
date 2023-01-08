@@ -180,6 +180,51 @@ export const addNewBlog = (data) => async (dispatch) => {
     }
   }
 };
+export const updateBlog = (data, id) => async (dispatch) => {
+  try {
+    dispatch(setLoading(true));
+    const headers = {
+      "content-type": "application/json",
+    };
+    const response = await axios.patch(`${ROOT_API}/blog/${id}`, data, {
+      headers,
+    });
+    const res = response.data;
+    if (res?.status === "success") {
+      dispatch(setLoading(false));
+      dispatch(setSuccessAddNewBlog(true));
+    } else {
+      dispatch(setLoading(false));
+      dispatch(setSuccessAddNewBlog(false));
+      dispatch(
+        setError({
+          type: "error",
+          message: "An unexpected error occured processing your request.",
+        })
+      );
+    }
+  } catch (err) {
+    if (err.response) {
+      dispatch(
+        setError({
+          type: "error",
+          message:
+            err.response.data && err.response.data.error
+              ? err.response.data.error
+              : "Something went wrong...",
+        })
+      );
+    } else {
+      dispatch(
+        setError({
+          type: "error",
+          message: "An unexpected error occured processing your request.",
+        })
+      );
+    }
+  }
+};
+
 export const deleteBlog = (id) => async (dispatch) => {
   try {
     dispatch(setLoading(true));

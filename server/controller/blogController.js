@@ -78,7 +78,6 @@ exports.createNewBlog = async (req, res, next) => {
 exports.updateBlogByID = async (req, res, next) => {
   try {
     const blog = await updatedBlogByIdServices(req.body, req.params.id);
-    console.log(blog);
     if (blog.modifiedCount) {
       return res.status(201).json({
         status: "success",

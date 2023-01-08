@@ -8,6 +8,7 @@ import AddBLog from "./components/AddBLog";
 import SingleBlog from "./components/SingleBlog";
 import Login from "./components/Login";
 import BlogList from "./components/BlogList";
+import EditBlog from "./components/EditBlog";
 
 const router = createBrowserRouter([
   {
@@ -28,16 +29,20 @@ const router = createBrowserRouter([
         element: <AddBLog />,
       },
       {
-        path: "blog/:id",
-        element: <SingleBlog />,
-      },
-      {
         path: "blog-list",
         element: <BlogList />,
       },
       {
         path: "login",
         element: <Login />,
+      },
+      {
+        path: "edit-blog/:id",
+        element: <EditBlog />,
+      },
+      {
+        path: "blog/:id",
+        element: <SingleBlog />,
       },
       //   {
       //     element: <AuthLayout />,
