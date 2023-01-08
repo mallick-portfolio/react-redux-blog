@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getBlogs } from "../app/blogSlice";
+import { deleteBlog, getBlogs } from "../app/blogSlice";
 import Loading from "./Loading";
 const BlogList = () => {
   const { blogs, loading, error } = useSelector((state) => state.blog);
@@ -16,6 +16,10 @@ const BlogList = () => {
   if (error) {
     return error.message;
   }
+
+  const handleDelete = (id) => {
+    dispatch(deleteBlog(id));
+  };
 
   let blogItem = "";
   if (blogs.length) {
@@ -42,6 +46,7 @@ const BlogList = () => {
               Edit
             </button>
             <button
+              onClick={() => handleDelete(blog?._id)}
               type="button"
               className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
             >
